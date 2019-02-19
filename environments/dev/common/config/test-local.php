@@ -1,4 +1,4 @@
-ve<?php
+<?php
 return [
     'components' => [
         'db' => [
