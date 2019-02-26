@@ -12,7 +12,6 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'layout' => 'dmstr-layout/main',
     'bootstrap' => ['log'],
-    'modules' => [],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -44,6 +43,9 @@ return [
             'rules' => [
             ],
         ],
+    ],
+    'modules' => [
+        'chat' => \common\modules\chat\Module::class
     ],
     'params' => $params,
 ];

@@ -2,19 +2,27 @@
 
 namespace common\modules\chat\controllers;
 
-use yii\web\Controller;
+use common\modules\chat\components\Chat;
+use Ratchet\Server\IoServer;
+use Ratchet\Http\HttpServer;
+use Ratchet\WebSocket\WsServer;
 
 /**
  * Default controller for the `chat` module
  */
-class DefaultController extends Controller
+class DefaultController extends \yii\console\Controller
 {
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
     public function actionIndex()
     {
-        return $this->render('index');
+        $server = IoServer::factory(
+            new HttpServer(
+                new WsServer(
+                    new Chat()
+                )
+            ),
+            8080
+        );
+        echo 'server start';
+        $server->run();
     }
 }
