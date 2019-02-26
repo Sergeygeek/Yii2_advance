@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Task;
-use common\models\search\TaskSearchBackend;
+use common\models\search\TaskSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +35,7 @@ class TaskController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TaskSearchBackend();
+        $searchModel = new TaskSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
