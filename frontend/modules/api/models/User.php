@@ -9,21 +9,20 @@ namespace frontend\modules\api\models;
  * @inheritdoc
  */
 
-class Task extends \common\models\Task
+class User extends \common\models\User
 {
     public function extraFields()
     {
-        return [self::RELATION_PROJECT];
+        return [self::ACTIVED_TASKS];
     }
 
     public function fields()
     {
         return [
             'id',
-            'title',
-            'description_short' => function($model){
-                return substr($model->description, 0, 50);
-            }
+            'name' => 'username'
         ];
     }
+
+
 }

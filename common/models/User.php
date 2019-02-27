@@ -222,4 +222,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Project::className(), ['updater_id' => 'id']);
     }
+
+//    public function fields()
+//    {
+//        return [
+//            'username'
+//        ];
+//    }
 }
