@@ -21,9 +21,14 @@ use yii\behaviors\TimestampBehavior;
  * @property User $creator
  * @property User $updater
  * @property ProjectUser[] $projectUsers
+ * @property Task[] $projectTasks
  */
 class Project extends \yii\db\ActiveRecord
 {
+    const RELATION_PROJECT_USERS = 'projectUsers';
+    const RELATION_PROJECT_TASKS = 'projectTasks';
+    const RELATION_CREATOR = 'creator';
+    const RELATION_UPDATER = 'updater';
     /**
      * {@inheritdoc}
      */
@@ -38,7 +43,7 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'creator_id', 'created_at'], 'required'],
+            [['title', 'description'], 'required'],
             [['description'], 'string'],
             [['active', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255],
@@ -106,5 +111,10 @@ class Project extends \yii\db\ActiveRecord
     public static function find()
     {
         return new \common\models\query\ProjectQuery(get_called_class());
+    }
+
+    public function getProjectTasks()
+    {
+        return $this->hasMany(Task::className(), ['project_id' => 'id']);
     }
 }
