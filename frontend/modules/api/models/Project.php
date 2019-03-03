@@ -2,8 +2,17 @@
 
 namespace frontend\modules\api\models;
 
+/**
+ * Class Project
+ * @package frontend\modules\api\models
+ * @inheritdoc
+ * @property Task[] $tasks
+ */
+
 class Project extends \common\models\Project
 {
+    const RELATION_TASKS = 'tasks';
+
     public function fields()
     {
         return [
@@ -16,8 +25,13 @@ class Project extends \common\models\Project
         ];
     }
 
+    public function getTasks()
+    {
+        return $this->hasMany(Task::className(), ['project_id' => 'id']);
+    }
+
     public function extraFields()
     {
-        return [self::RELATION_PROJECT_TASKS];
+        return [self::RELATION_TASKS];
     }
 }

@@ -34,6 +34,9 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 
+# upload images
+/frontend/web/upload
+
 # ignore generated files
 /frontend/web/index.php
 /frontend/web/index-test.php

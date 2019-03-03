@@ -20,13 +20,13 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property User $creator
  * @property User $updater
- * @property ProjectUser[] $projectUsers
- * @property Task[] $projectTasks
+ * @property User[] $users
+ * @property Task[] $tasks
  */
 class Project extends \yii\db\ActiveRecord
 {
-    const RELATION_PROJECT_USERS = 'projectUsers';
-    const RELATION_PROJECT_TASKS = 'projectTasks';
+    const RELATION_USERS = 'users';
+    const RELATION_TASKS = 'tasks';
     const RELATION_CREATOR = 'creator';
     const RELATION_UPDATER = 'updater';
     /**
@@ -99,7 +99,7 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProjectUsers()
+    public function getUsers()
     {
         return $this->hasMany(ProjectUser::className(), ['project_id' => 'id']);
     }
@@ -113,7 +113,7 @@ class Project extends \yii\db\ActiveRecord
         return new \common\models\query\ProjectQuery(get_called_class());
     }
 
-    public function getProjectTasks()
+    public function getTasks()
     {
         return $this->hasMany(Task::className(), ['project_id' => 'id']);
     }
