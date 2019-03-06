@@ -111,7 +111,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         if ($this->password) {
-            $this->password_hash = \Yii::$app->getSecurity()->generatePasswordHash($this->password);
+            $this->generateAuthKey();
         }
 
 
@@ -224,7 +224,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if($password){
             $this->password_hash = Yii::$app->security->generatePasswordHash($password);
-            $this->generateAuthKey();
         }
 
         $this->password = $password;

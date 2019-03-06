@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'layout' => 'dmstr-layout/main',
+    'language' => 'ru',
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
@@ -23,6 +24,9 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'on '. \yii\web\User::EVENT_AFTER_LOGIN => function() {
+                Yii::info('Log in success', 'auth');
+            }
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
@@ -34,6 +38,12 @@ return [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'logFile' => '@runtime/auth.log',
+                    'categories' => 'auth',
+                    'logVars' => [],
                 ],
             ],
         ],
