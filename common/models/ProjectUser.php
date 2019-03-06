@@ -17,6 +17,15 @@ use Yii;
  */
 class ProjectUser extends \yii\db\ActiveRecord
 {
+    const ROLE_DEVELOPER = 'Developer';
+    const ROLE_MANAGER = 'Manager';
+    const ROLE_TESTER = 'Tester';
+
+    const ROLE_LABELS= [
+        self::ROLE_DEVELOPER => 'Developer',
+        self::ROLE_MANAGER => 'Manager',
+        self::ROLE_TESTER => 'Tester',
+    ];
     /**
      * {@inheritdoc}
      */

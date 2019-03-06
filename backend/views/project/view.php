@@ -9,6 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$status = \common\models\Project::STATUSES_LABELS[$model->active];
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="project-view">
@@ -25,18 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'title',
             'description:ntext',
-            'active',
-            'creator_id',
-            'updater_id',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'active',
+                'value' => $status
+            ],
+//            'creator_id',
+//            'updater_id',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 

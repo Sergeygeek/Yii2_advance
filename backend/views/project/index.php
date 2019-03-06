@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description:ntext',
             'active:boolean',
-            'completed_at',
 //            'creator_id',
             //'updater_id',
             //'created_at',

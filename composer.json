@@ -22,7 +22,9 @@
         "rmrevin/yii2-fontawesome": "2.17",
         "cboden/ratchet": "dev-master",
         "yiisoft/yii2-imagine": "^2.0@dev",
-        "mohorev/yii2-upload-behavior": "*"
+        "mohorev/yii2-upload-behavior": "*",
+        "la-haute-societe/yii2-save-relations-behavior": "*",
+        "unclead/yii2-multiple-input": "~2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

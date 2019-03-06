@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'access_token',
             [
                 'attribute' => 'status',
-                'content' => function(\common\models\User $model){
+                'value' => function(\common\models\User $model){
                     return \common\models\User::STATUS_LABELS[$model->status];
                 }
             ]

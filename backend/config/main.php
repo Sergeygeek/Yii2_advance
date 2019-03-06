@@ -41,7 +41,7 @@ return [
                 ],
                 [
                     'class' => 'yii\log\FileTarget',
-                    'logFile' => '@runtime/auth.log',
+                    'logFile' => '@frontend/runtime/logs/auth.log',
                     'categories' => 'auth',
                     'logVars' => [],
                 ],
