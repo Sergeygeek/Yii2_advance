@@ -13,6 +13,15 @@ class ProjectUserQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere('[[status]]=1');
     }*/
+    public function byUser($userId, $role = null)
+    {
+        $this->andWhere(['user_id' => $userId]);
+
+        if ($role) {
+            $this->andWhere(['role' => $role]);
+        }
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
