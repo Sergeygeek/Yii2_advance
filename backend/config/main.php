@@ -54,6 +54,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '<controller:[\w-]+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>s' => '<controller>/index',
+                '<controller:[\w-]+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
             ],
         ],
     ],
