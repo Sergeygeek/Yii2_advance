@@ -2,6 +2,7 @@
 
 namespace common\models\query;
 
+use common\models\Project;
 use common\models\ProjectUser;
 
 /**
@@ -18,8 +19,8 @@ class ProjectQuery extends \yii\db\ActiveQuery
 
     public function byUser($userId, $role = null)
     {
-        $query = ProjectUser::find()->select('project_id')->byUser($userId, $role);
-        return $this->andWhere(['id' => $query]);
+        $query = Project::find()->select('id')->byUser($userId, $role);
+        return $this->andWhere(['project_id' => $query]);
     }
 
     /**
