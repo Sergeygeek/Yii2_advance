@@ -12,5 +12,18 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'projectService' => [
+            'class' => \common\services\ProjectService::class,
+            'on '.\common\services\ProjectService::EVENT_ASSIGN_ROLE =>
+                function(\common\services\AssignRoleEvent $e){
+                    Yii::$app->notificationService->notifyAboutNewRole($e->user, $e->role, $e->project);
+                }
+        ],
+        'emailService' => [
+            'class' => \common\services\EmailService::class,
+        ],
+        'notificationService' => [
+            'class' => \common\services\NotificationService::class,
+        ]
     ],
 ];
