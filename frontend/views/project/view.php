@@ -23,23 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             [
                 'attribute' => 'active',
-                'content' => \common\models\Project::STATUSES_LABELS[$model->active],
+                'value' => \common\models\Project::STATUSES_LABELS[$model->active],
             ],
             [
                 'attribute' => 'creator_id',
-                'content' => $model->creator_id->username,
+                'content' => $model->creator_id,
             ],
             [
                 'attribute' => 'updater_id',
-                'content' => $model->updater_id->username,
-            ],
-            [
-                'attribute'=>'roles',
-                'content'=> function (\common\models\Project $model) {
-                    return join(
-                        ',',
-                        Yii::$app->projectService->getRoles($model, Yii::$app->user));
-                },
+                'content' => $model->updater_id,
             ],
             'created_at:datetime',
             'updated_at:datetime',

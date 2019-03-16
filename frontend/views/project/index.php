@@ -30,9 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => \common\models\Project::RELATION_PROJECT_USERS . '.role',
                 'content' => function (\common\models\Project $model) {
-                    return join(',', Yii::$app->projectService->getRolles($model, Yii::$app->user->identity));
+                    return join(',', Yii::$app->projectService->getRoles($model, Yii::$app->user->identity));
                 },
                 'format' => 'html'
+                //Yii::$app->projectService->getRolles($model, Yii::$app->user->identity)
             ],
             [
                 'attribute' => 'active',
