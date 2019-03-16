@@ -42,5 +42,7 @@ $status = \common\models\Project::STATUSES_LABELS[$model->active];
             'updated_at:datetime',
         ],
     ]) ?>
-
+    <?php echo \yii2mod\comments\widgets\Comment::widget([
+        'model' => $model,
+    ]); ?>
 </div>

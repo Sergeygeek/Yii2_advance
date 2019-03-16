@@ -16,21 +16,34 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title',
+            [
+                'attribute' => 'title',
+                'content' => function (\common\models\Project $model) {
+                    return Html::a($model->title, ['view', 'id' => $model->id]);
+                },
+                'format' => 'html'
+            ],
+            [
+                'attribute' => \common\models\Project::RELATION_PROJECT_USERS . '.role',
+                'content' => function (\common\models\Project $model) {
+                    return join(',', Yii::$app->projectService->getRolles($model, Yii::$app->user->identity));
+                },
+                'format' => 'html'
+            ],
+            [
+                'attribute' => 'active',
+                'filter' => \common\models\Project::STATUSES_LABELS,
+                'content' => function (\common\models\Project $model) {
+                    return \common\models\Project::STATUSES_LABELS[$model->active];
+                },
+                'format' => 'html'
+            ],
             'description:ntext',
-            'active',
-            'creator_id',
+            //'creator_id',
             //'updater_id',
             //'created_at',
             //'updated_at',

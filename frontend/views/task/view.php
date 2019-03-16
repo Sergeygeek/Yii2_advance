@@ -29,18 +29,49 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
+            'project.title',
             'title',
             'description:ntext',
             'project_id',
             'executor_id',
-            'started_at',
-            'completed_at',
+            'started_at:datetime',
+            'completed_at:datetime',
             'creator_id',
             'updater_id',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {take}',
+                'buttons' => [
+                        'take' => function ($url, \common\models\Task $model, $key) {
+                            $icon = \yii\bootstrap\Html::icon('hand-right');
+                            return Html::a($icon, ['task/take', 'id' => $model->id], ['data' => [
+                                'confirm' => 'Берете задачу?',
+                                'method' => 'post'
+                            ],]);
+                        },
+                ],
+                'visibleButtons' => [
+                    'update' => function(\common\models\Task $model, $key, $index) {
+                        return Yii::$app->projectService->hasRole($model->project, Yii::$app->user->identity,
+                            \common\models\ProjectUser::ROLE_MANAGER);
+                    },
+                    'delete' => function(\common\models\Task $model, $key, $index) {
+                        return Yii::$app->projectService->hasRole($model->project, Yii::$app->user->identity,
+                            \common\models\ProjectUser::ROLE_MANAGER);
+                    },
+                    'take' => function(\common\models\Task $model, $key, $index) {
+                        return Yii::$app->projectService->hasRole($model->project, Yii::$app->user->identity,
+                            \common\models\ProjectUser::ROLE_DEVELOPER);
+                    }
+
+                ]
+            ]
         ],
     ]) ?>
-
+    <?php echo \yii2mod\comments\widgets\Comment::widget([
+        'model' => $model,
+    ]); ?>
 </div>
